@@ -1,0 +1,8 @@
+{
+  "name": "Sample kitchen ledge",
+  "lengthMm": 2400,
+  "widthMm": 1200,
+  "thicknessMm": 100,
+  "courseHeightMm": 125,
+  "courses": 2
+}
