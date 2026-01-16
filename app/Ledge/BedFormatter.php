@@ -14,6 +14,7 @@ class BedFormatter
             "bed: {$plan['lengthMm']} mm by {$plan['widthMm']} mm",
             "courses: {$plan['courses']} at {$plan['courseHeightMm']} mm, height {$plan['heightMm']} mm",
             "inner: {$plan['innerLengthMm']} mm by {$plan['innerWidthMm']} mm",
+            $plan['liner'] ? "liner: {$plan['linerAreaMm2']} mm²" : 'liner: none',
             "timber: {$plan['timberLengthMm']} mm",
             "soil: {$plan['soilLitres']} L",
         ]);

@@ -32,4 +32,12 @@ class Layout
     {
         return intdiv($volumeMm3, 1_000_000);
     }
+
+    public static function linerAreaMm2(int $innerLengthMm, int $innerWidthMm, int $heightMm): int
+    {
+        $floor = $innerLengthMm * $innerWidthMm;
+        $walls = 2 * ($innerLengthMm + $innerWidthMm) * $heightMm;
+
+        return $floor + $walls;
+    }
 }

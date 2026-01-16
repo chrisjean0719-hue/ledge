@@ -33,6 +33,13 @@ class BedValidator
         if (! self::inRange($bed['courses'] ?? null, Sizes::MIN_COURSES, Sizes::MAX_COURSES)) {
             $errors[] = 'courses: courses must be an integer from '.Sizes::MIN_COURSES.' to '.Sizes::MAX_COURSES;
         }
+        $liner = $bed['liner'] ?? false;
+        if ($liner === null) {
+            $liner = false;
+        }
+        if (! is_bool($liner)) {
+            $errors[] = 'liner: liner must be true or false';
+        }
         if ($errors !== []) {
             return $errors;
         }

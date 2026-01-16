@@ -20,6 +20,7 @@ class BedPlanner
         $thickness = $filled['thicknessMm'];
         $courseHeight = $filled['courseHeightMm'];
         $courses = $filled['courses'];
+        $liner = (bool) ($filled['liner'] ?? false);
         [$innerLength, $innerWidth] = Layout::innerSize($length, $width, $thickness);
         $height = $courses * $courseHeight;
         $volume = Layout::soilVolumeMm3($innerLength, $innerWidth, $height);
@@ -34,6 +35,8 @@ class BedPlanner
             'heightMm' => $height,
             'innerLengthMm' => $innerLength,
             'innerWidthMm' => $innerWidth,
+            'liner' => $liner,
+            'linerAreaMm2' => $liner ? Layout::linerAreaMm2($innerLength, $innerWidth, $height) : 0,
             'timberLengthMm' => Layout::timberLengthMm($length, $width, $courses),
             'soilVolumeMm3' => $volume,
             'soilLitres' => Layout::soilLitres($volume),
@@ -49,6 +52,9 @@ class BedPlanner
         $filled['thicknessMm'] ??= Sizes::DEFAULT_THICKNESS_MM;
         $filled['courseHeightMm'] ??= Sizes::DEFAULT_COURSE_HEIGHT_MM;
         $filled['courses'] ??= Sizes::DEFAULT_COURSES;
+        if (! array_key_exists('liner', $filled) || $filled['liner'] === null) {
+            $filled['liner'] = false;
+        }
 
         return $filled;
     }

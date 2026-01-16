@@ -1,14 +1,10 @@
 # Roadmap
 
-Ledge plans one timber raised bed over HTTP and counts its sleepers and soil. Five updates remain, and about 38 hours stay after those.
+Ledge plans one timber raised bed over HTTP, can add a liner, and counts its sleepers and soil. Four updates remain, and about 38 hours stay after those.
 
-## The next five updates
+## The next four updates
 
-### Liner (the next update)
-
-Add an optional liner and report the area that covers the inside faces and the floor.
-
-### Drainage layer
+### Drainage layer (the next update)
 
 Add a drainage layer of gravel under the soil and reduce the soil height by that depth.
 
@@ -72,4 +68,4 @@ Add a trellis on one long side and count its uprights and bars.
 
 List the screws, the stakes, and the liner clips for the plan.
 
-A liner is the next piece. The API can plan one bed, and it does not yet add a liner.
+A drainage layer is the next piece. The API can add a liner, and it does not yet put gravel under the soil.
