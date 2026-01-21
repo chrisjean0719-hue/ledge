@@ -40,12 +40,21 @@ class BedValidator
         if (! is_bool($liner)) {
             $errors[] = 'liner: liner must be true or false';
         }
+        $drainage = $bed['drainageMm'] ?? null;
+        if ($drainage !== null && ! self::inRange($drainage, Sizes::MIN_DRAINAGE_MM, Sizes::MAX_DRAINAGE_MM)) {
+            $errors[] = 'drainageMm: drainageMm must be an integer from '.Sizes::MIN_DRAINAGE_MM.' to '.Sizes::MAX_DRAINAGE_MM;
+        }
         if ($errors !== []) {
             return $errors;
         }
 
         if (Layout::innerSize($bed['lengthMm'], $bed['widthMm'], $bed['thicknessMm']) === null) {
             $errors[] = 'thicknessMm: the sleepers leave an opening under '.Sizes::MIN_INNER_MM.' mm';
+        }
+        $height = $bed['courses'] * $bed['courseHeightMm'];
+        $drainageMm = is_int($drainage) ? $drainage : 0;
+        if ($drainageMm > 0 && $height - $drainageMm < Sizes::MIN_SOIL_MM) {
+            $errors[] = 'drainageMm: the drainage layer leaves the soil under '.Sizes::MIN_SOIL_MM.' mm';
         }
 
         return $errors;

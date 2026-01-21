@@ -31,4 +31,10 @@ class Sizes
     public const DEFAULT_COURSES = 2;
 
     public const MIN_INNER_MM = 400;
+
+    public const MIN_DRAINAGE_MM = 40;
+
+    public const MAX_DRAINAGE_MM = 150;
+
+    public const MIN_SOIL_MM = 100;
 }
