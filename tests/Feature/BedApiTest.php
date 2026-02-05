@@ -20,6 +20,7 @@ class BedApiTest extends TestCase
         $sample->assertJsonPath('linerAreaMm2', 0);
         $sample->assertJsonPath('drainageMm', 0);
         $sample->assertJsonPath('gravelLitres', 0);
+        $sample->assertJsonPath('stakeCount', 0);
     }
 
     public function test_a_posted_bed_matches_the_sample_and_a_bad_bed_is_a_400(): void
@@ -40,6 +41,12 @@ class BedApiTest extends TestCase
         $drained->assertJsonPath('soilHeightMm', 200);
         $drained->assertJsonPath('gravelLitres', 110);
         $drained->assertJsonPath('soilLitres', 440);
+
+        $staked = $this->postJson('/api/beds', [...SampleBed::kitchen(), 'setMm' => 400]);
+        $staked->assertOk();
+        $staked->assertJsonPath('stakeCount', 4);
+        $staked->assertJsonPath('stakeLengthMm', 650);
+        $staked->assertJsonPath('timberLengthMm', 17000);
 
         $bad = $this->postJson('/api/beds', [
             'name' => '',

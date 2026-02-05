@@ -22,11 +22,14 @@ class BedPlanner
         $courses = $filled['courses'];
         $liner = (bool) ($filled['liner'] ?? false);
         $drainage = $filled['drainageMm'] ?? 0;
+        $set = $filled['setMm'] ?? 0;
         [$innerLength, $innerWidth] = Layout::innerSize($length, $width, $thickness);
         $height = $courses * $courseHeight;
         $soilHeight = $height - $drainage;
         $soilVolume = Layout::soilVolumeMm3($innerLength, $innerWidth, $soilHeight);
         $gravelVolume = $drainage === 0 ? 0 : Layout::soilVolumeMm3($innerLength, $innerWidth, $drainage);
+        $stakeLength = $set === 0 ? 0 : Layout::stakeLengthMm($height, $set);
+        $stakeWood = $set === 0 ? 0 : Layout::stakeWoodMm($stakeLength);
 
         return [
             'name' => trim($filled['name']),
@@ -44,7 +47,10 @@ class BedPlanner
             'soilHeightMm' => $soilHeight,
             'gravelVolumeMm3' => $gravelVolume,
             'gravelLitres' => Layout::soilLitres($gravelVolume),
-            'timberLengthMm' => Layout::timberLengthMm($length, $width, $courses),
+            'setMm' => $set,
+            'stakeCount' => $set === 0 ? 0 : 4,
+            'stakeLengthMm' => $stakeLength,
+            'timberLengthMm' => Layout::timberLengthMm($length, $width, $courses) + $stakeWood,
             'soilVolumeMm3' => $soilVolume,
             'soilLitres' => Layout::soilLitres($soilVolume),
         ];

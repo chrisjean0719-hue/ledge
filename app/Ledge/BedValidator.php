@@ -44,6 +44,10 @@ class BedValidator
         if ($drainage !== null && ! self::inRange($drainage, Sizes::MIN_DRAINAGE_MM, Sizes::MAX_DRAINAGE_MM)) {
             $errors[] = 'drainageMm: drainageMm must be an integer from '.Sizes::MIN_DRAINAGE_MM.' to '.Sizes::MAX_DRAINAGE_MM;
         }
+        $set = $bed['setMm'] ?? null;
+        if ($set !== null && ! self::inRange($set, Sizes::MIN_SET_MM, Sizes::MAX_SET_MM)) {
+            $errors[] = 'setMm: setMm must be an integer from '.Sizes::MIN_SET_MM.' to '.Sizes::MAX_SET_MM;
+        }
         if ($errors !== []) {
             return $errors;
         }

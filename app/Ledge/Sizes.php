@@ -37,4 +37,8 @@ class Sizes
     public const MAX_DRAINAGE_MM = 150;
 
     public const MIN_SOIL_MM = 100;
+
+    public const MIN_SET_MM = 300;
+
+    public const MAX_SET_MM = 900;
 }

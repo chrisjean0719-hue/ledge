@@ -24,10 +24,13 @@ class PlanTest extends TestCase
         $this->assertSame(0, $plan['drainageMm']);
         $this->assertSame(250, $plan['soilHeightMm']);
         $this->assertSame(0, $plan['gravelLitres']);
+        $this->assertSame(0, $plan['setMm']);
+        $this->assertSame(0, $plan['stakeCount']);
         $text = BedFormatter::format($plan);
         $this->assertStringStartsWith('Sample kitchen ledge', $text);
         $this->assertStringContainsString('liner: none', $text);
         $this->assertStringContainsString('drainage: none', $text);
+        $this->assertStringContainsString('stakes: none', $text);
         $this->assertStringContainsString('timber: 14400 mm', $text);
         $this->assertStringContainsString('soil: 550 L', $text);
     }

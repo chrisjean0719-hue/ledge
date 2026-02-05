@@ -18,6 +18,9 @@ class BedFormatter
             $plan['drainageMm'] === 0
                 ? 'drainage: none'
                 : "drainage: {$plan['drainageMm']} mm, gravel {$plan['gravelLitres']} L",
+            $plan['setMm'] === 0
+                ? 'stakes: none'
+                : "stakes: {$plan['stakeCount']} at {$plan['stakeLengthMm']} mm, set {$plan['setMm']} mm",
             "timber: {$plan['timberLengthMm']} mm",
             "soil: {$plan['soilLitres']} L",
         ]);

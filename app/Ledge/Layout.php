@@ -40,4 +40,14 @@ class Layout
 
         return $floor + $walls;
     }
+
+    public static function stakeLengthMm(int $heightMm, int $setMm): int
+    {
+        return $heightMm + $setMm;
+    }
+
+    public static function stakeWoodMm(int $stakeLengthMm): int
+    {
+        return 4 * $stakeLengthMm;
+    }
 }
