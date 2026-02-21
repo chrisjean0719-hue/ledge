@@ -55,5 +55,22 @@ class BedApiTest extends TestCase
         ]);
         $bad->assertStatus(400);
         $bad->assertExactJson(['errors' => ['name: Bed needs a name']]);
+
+        $elevation = $this->get('/api/sample/elevation');
+        $elevation->assertOk();
+        $elevation->assertHeader('content-type', 'image/svg+xml; charset=utf-8');
+        $this->assertStringContainsString(
+            'sample-kitchen-ledge-elevation.svg',
+            (string) $elevation->headers->get('content-disposition'),
+        );
+        $elevation->assertSee('viewBox="0 0 2400 266"', false);
+
+        $badDrawing = $this->postJson('/api/beds/elevation', [
+            'name' => '',
+            'lengthMm' => 2400,
+            'widthMm' => 1200,
+        ]);
+        $badDrawing->assertStatus(400);
+        $badDrawing->assertExactJson(['errors' => ['name: Bed needs a name']]);
     }
 }

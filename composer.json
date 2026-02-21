@@ -2,7 +2,7 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "ledge/ledge",
     "type": "project",
-    "description": "Plan a timber raised bed with a liner, drainage, and corner stakes",
+    "description": "Plan a timber raised bed and return its elevation",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
