@@ -72,5 +72,21 @@ class BedApiTest extends TestCase
         ]);
         $badDrawing->assertStatus(400);
         $badDrawing->assertExactJson(['errors' => ['name: Bed needs a name']]);
+
+        $compared = $this->postJson('/api/beds/compare', [
+            'left' => SampleBed::kitchen(),
+            'right' => ['name' => 'Herb strip', 'lengthMm' => 1200, 'widthMm' => 800],
+        ]);
+        $compared->assertOk();
+        $compared->assertJsonPath('timberLengthMm', [14400, 8000]);
+        $compared->assertJsonPath('soilLitres', [550, 150]);
+        $compared->assertJsonPath('text', "Sample kitchen ledge vs Herb strip\ntimber: 14400 mm vs 8000 mm\nsoil: 550 L vs 150 L");
+
+        $rejected = $this->postJson('/api/beds/compare', [
+            'left' => ['name' => '', 'lengthMm' => 2400, 'widthMm' => 1200],
+            'right' => SampleBed::kitchen(),
+        ]);
+        $rejected->assertStatus(400);
+        $rejected->assertExactJson(['errors' => ['left.name: Bed needs a name']]);
     }
 }
