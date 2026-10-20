@@ -35,7 +35,7 @@ tests/          unit tests
 
 ## Next
 
-The six updates are complete. About 38 hours of later work stay in [ROADMAP.md](ROADMAP.md).
+The six updates are complete. About 30 hours of later work stay in [ROADMAP.md](ROADMAP.md).
 
 ## License
 
